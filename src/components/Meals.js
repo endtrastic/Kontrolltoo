@@ -1,16 +1,15 @@
-import React,{ useState, useEffect } from 'react';
+import React from 'react';
+import MealItem from './MealItem';
+import '../index.css'
 
+const Meals = ({ meals }) => {
+  return (
+    <ul>
+      {meals.map((meal) => (
+        <MealItem key={meal.id} meal={meal} /> 
+      ))}
+    </ul>
+  );
+};
 
-
-
-const Meals = () => {
-
-    return (
-        <ul id="meals">
-            { 
-            }   
-        </ul>
-    )
-}
-
-export default Meals
+export default Meals;

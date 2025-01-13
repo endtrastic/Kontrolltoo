@@ -1,20 +1,18 @@
-import './index.css'
 import Header from './components/Header'
+import './index.css'
 import Meals from './components/Meals' 
+import MealItem from './components/MealItem';
 
-
-fetch('http://localhost:3001/meals')
-  .then(response => response.json())
-  .then(data => {
-    console.log('Data:', data);
-});
+const res = await fetch('http://localhost:3001/meals');
+const meals = await res.json();
+console.log(meals)
 
 const App = () => {
  return (
     <>
      <h1>Food Order App</h1>
-     <Meals />
      <Header/>
+     <Meals meals={meals} />
     </>
   );
 }
