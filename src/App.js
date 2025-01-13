@@ -1,20 +1,29 @@
-import Header from './components/Header'
-import './index.css'
-import Meals from './components/Meals' 
-import MealItem from './components/MealItem';
-
-const res = await fetch('http://localhost:3001/meals');
-const meals = await res.json();
-console.log(meals)
+import React, { useState, useEffect } from 'react';
+import './index.css';
+import Header from './components/Header';
+import Meals from './components/Meals';
+import { CartProvider } from './store/CartContext';
 
 const App = () => {
- return (
-    <>
-     <h1>Food Order App</h1>
-     <Header/>
-     <Meals meals={meals} />
-    </>
+  const [meals, setMeals] = useState([]);
+
+  useEffect(() => {
+    const fetchMeals = async () => {
+      const res = await fetch('http://localhost:3001/meals');
+      const data = await res.json();
+      setMeals(data); 
+    };
+
+    fetchMeals();
+  }, []);
+
+  return (
+    <CartProvider> 
+      <h1>Food Order App</h1>
+      <Header /> 
+      <Meals meals={meals} /> 
+    </CartProvider>
   );
-}
+};
 
 export default App;
